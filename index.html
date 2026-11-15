@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f8e2ed" />
+  <meta name="description" content="给佳佳的一份生日祝福" />
+  <title>生日快乐，佳佳</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/heart.svg" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <script src="./js/config.js" defer></script>
+  <script src="./js/main.js" defer></script>
+</head>
+<body>
+  <div id="app" class="app night" data-stage="0">
+    <div class="world-border" aria-hidden="true">
+      <span class="lace-edge lace-top"></span>
+      <span class="lace-edge lace-right"></span>
+      <span class="lace-edge lace-bottom"></span>
+      <span class="lace-edge lace-left"></span>
+      <span class="corner-bow"></span>
+      <span class="lace-rosette rosette-tr"></span>
+      <span class="lace-rosette rosette-br"></span>
+      <span class="lace-rosette rosette-bl"></span>
+    </div>
+    <div class="sky" aria-hidden="true">
+      <div id="starfield" class="starfield"></div>
+      <div class="pixel-moon"></div>
+      <div class="cloud cloud-a"></div><div class="cloud cloud-b"></div>
+      <div class="cloud cloud-c"></div><div class="cloud cloud-d"></div>
+      <div class="pixel-plus plus-1"></div><div class="pixel-plus plus-2"></div>
+      <div class="pixel-plus plus-3"></div><div class="pixel-plus plus-4"></div>
+      <div class="lantern lantern-a"></div><div class="lantern lantern-b"></div>
+      <div class="lantern lantern-c"></div><div class="lantern lantern-d"></div>
+    </div>
+    <div class="floor" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+    <div id="particle-layer" class="particles" aria-hidden="true"></div>
+
+    <header class="header">
+      <div class="player" id="player-label">PLAYER 02 · 佳佳 / LOVE +999</div>
+      <div class="toolbar">
+        <button class="top-button" id="fullscreen-btn" type="button" title="全屏模式">⛶ <span>进入全屏</span></button>
+        <button class="top-button" id="music-btn" type="button" aria-pressed="true" title="打开或关闭背景音乐">♫ <span>音乐已关闭</span></button>
+      </div>
+    </header>
+
+    <main class="main" id="main-content">
+
+      <section class="scene scene-intro active" data-scene="0" aria-labelledby="intro-title">
+        <div class="intro-content scene-wrap">
+          <p class="eyebrow">♡ 你收到了一份生日祝福 ♡</p>
+          <h1 id="intro-title" class="big-title intro-title">佳佳，等你好久了。</h1>
+          <p class="subtitle intro-subtitle">把小寿星的烦心事留在门外，打开你的礼盒啵</p>
+          <button class="sprite-button gift-button floaty" id="gift-btn" type="button" aria-label="点击打开礼物">
+            <img class="gift-character-img" src="./assets/gift-character-teacup.png" alt="美乐蒂" draggable="false" />
+            <img class="gift-name-tag" src="./assets/gift-name-tag.svg" alt="给佳佳 ♡" draggable="false" />
+          </button>
+          <p class="hint"><span class="hint-arrow">▶</span> 轻轻点开</p>
+        </div>
+      </section>
+
+
+      <section class="scene scene-birthday" data-scene="1" aria-labelledby="birthday-title" hidden>
+        <div class="birthday-content scene-wrap">
+          <p class="eyebrow">HAPPY BIRTHDAY / 今日限定主角</p>
+          <h1 id="birthday-title" class="big-title birthday-title">生日快乐！</h1>
+          <h2 class="birthday-second">最最可爱的乖宝宝佳佳。</h2>
+          <div class="bunny-small bobbing"><img src="./assets/melody.png" alt="美乐蒂" /></div>
+          <p class="birthday-subtitle">愿11.18日全世界的温柔，都齐聚于你一身。</p>
+          <button class="pixel-button pink" id="birthday-next" type="button">还有惊喜？快给我看看 ↗</button>
+        </div>
+      </section>
+
+
+      <section class="scene scene-question" data-scene="2" aria-labelledby="question-title" hidden>
+        <div class="question-content scene-wrap">
+          <p class="eyebrow">先等一下，有个非常严肃的问题</p>
+          <div class="question-mascot">
+            <img class="bunny-question bobbing" src="./assets/melodytwo.png" alt="1" />
+            <div class="speech" id="speech">请寿星认真作答！</div>
+          </div>
+          <h1 id="question-title" class="question-title">你快说你自己是不是<br />全世界最可爱的人？</h1>
+          <div class="question-actions">
+            <button class="pixel-button pink" id="yes-btn" type="button">是的</button>
+            <button class="pixel-button cream" id="no-btn" type="button">不是</button>
+          </div>
+          <p class="response-line" id="question-response" aria-live="polite"></p>
+          <button class="text-button continue-question" id="question-next" type="button" hidden>好啦，一起许个愿吧 →</button>
+        </div>
+      </section>
+
+      <!-- 04: Make a wish -->
+      <section class="scene scene-wish" data-scene="3" aria-labelledby="wish-title" hidden>
+        <div class="wish-content scene-wrap">
+          <p class="eyebrow">MAKE A WISH, MY FAVORITE GIRL</p>
+          <h1 id="wish-title" class="big-title wish-title">闭上眼睛，许一个愿望吧。</h1>
+          <p class="subtitle wish-subtitle">愿望成真~</p>
+          <div class="cake-wrap" id="cake-wrap">
+            <img class="cake-img" src="./assets/birthday-cake-pixel.png" alt="粉色像素风美乐蒂主题生日蛋糕" />
+            <div class="wish-sparkle sparkle-1">✦</div>
+            <div class="wish-sparkle sparkle-2">✦</div>
+          </div>
+          <button class="pixel-button mauve wish-hold" id="wish-btn" type="button">呼—— 把愿望送给星星</button>
+          <div class="wish-progress" aria-hidden="true"><div id="wish-fill" class="wish-fill"></div></div>
+          <p class="hint wish-hint" id="wish-hint">按住鼠标或空格 2 秒，让愿望轻轻飞走。</p>
+          <button class="text-button" id="wish-skip" type="button">用点击代替长按 →</button>
+        </div>
+      </section>
+
+      <!-- 05: Confession -->
+      <section class="scene scene-confession" data-scene="4" aria-labelledby="confession-title" hidden>
+        <div class="confession-card scene-wrap" id="confession-card">
+          <p class="eyebrow" id="confession-counter">01 / 06 · 只说给你听</p>
+          <h1 id="confession-title" class="confession-title">其实，准备这些的时候，<br />我一直在想。</h1>
+          <p class="confession-desc" id="confession-desc">除了生日快乐，我最想对你说的是什么。</p>
+          <div id="envelope-container" class="envelope-container" hidden>
+            <img src="./assets/melody-strawberry-cutout.png" alt="1" />
+          </div>
+          <button class="pixel-button mauve" id="confession-next" type="button">next</button>
+        </div>
+      </section>
+
+      <!-- 06: Hug / finale -->
+      <section class="scene scene-finale" data-scene="5" aria-labelledby="finale-title" hidden>
+        <div class="finale-content scene-wrap">
+          <p class="eyebrow">QUEST COMPLETE / happy brithday</p>
+          <h1 id="finale-title" class="big-title finale-title">愿你幸福平安，不止于生日</h1>
+          <div class="two-bunnies" id="two-bunnies">
+            <img class="bunny-left" src="./assets/p.png" alt="美乐蒂" />
+            <img class="floating-heart" src="./assets/heart.svg" alt="粉色爱心" />
+          </div>
+          <p class="finale-message" id="finale-message">美好常伴<br />开心每天</p>
+          <button class="pixel-button pink" id="hug-btn" type="button">贴贴～</button>
+          <p class="finale-note" id="finale-note">定格永恒</p>
+          <button class="text-button finale-letter" id="read-letter-again" type="button">再读一遍那封信</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p id="stage-label">01 / 为你而来</p>
+      <nav class="steps" aria-label="场景导航">
+        <button class="step-dot current" data-go="0" aria-label="第 1 幕：礼物"></button>
+        <button class="step-dot" data-go="1" aria-label="第 2 幕：生日"></button>
+        <button class="step-dot" data-go="2" aria-label="第 3 幕：小问题"></button>
+        <button class="step-dot" data-go="3" aria-label="第 4 幕：许愿"></button>
+        <button class="step-dot" data-go="4" aria-label="第 5 幕：告白"></button>
+        <button class="step-dot" data-go="5" aria-label="第 6 幕：拥抱"></button>
+      </nav>
+      <p class="footer-love">佳佳专属</p>
+    </footer>
+
+    <div class="modal-overlay" id="letter-modal" hidden role="dialog" aria-modal="true" aria-labelledby="letter-title">
+      <article class="letter-paper">
+        <button class="letter-close" id="letter-close" type="button" aria-label="关闭信件">×</button>
+        <div class="letter-scroll">
+          <p class="letter-header" id="letter-title">TO Jiajia♡</p>
+          <p>佳佳亲启：</p>
+          <p>今天就是20岁的小大人了小妹妹</p>
+          <p>虽然我已经预感到了，在生日前不久肯定会有一些事情的发生<em>但是，生日大事，还是待我先娓娓祝福一番嘻嘻</em></p>
+          <p>今天是属于你的特别日子，又长大了一岁。希望身为童话公主的你，在新的一岁里，能够比以前更加开心、更加幸福，所有的烦恼都能少一点，所有的好运都能多一点。</p>
+          <p>其实有好多话想对你说，但想来想去，最想说的还是，谢谢你出现在我的生命里。遇见你、认识你、喜欢上你，对我来说都是很珍贵的事情。虽然我们经常也会闹别扭，会有不开心的时候，但诚挚的心和祝福永远不变</p>
+          <p>我知道你有委屈、有难过、有不被理解的时候，木讷的我也总是让你感受到了很多冷落，可能很多时候也能猜到自己的笨驴心思，让你误会成了真的故意不想对你好，情商也总是不在线不能多懂你一点，人也粗心，在你不开心的时候总是找不到方法哄哄你</p>
+		  <p>但关键时刻，生日这天还是希望你可以做一个幸福的小孩，也是我一直惦记了很久的你的生日，希望能给予你一些祝福</p>
+          <p><em>希望往后的日子里，你能幸福平安，可以有发自内心的开心和幸福，愿你付出的每一份真诚都能得到珍惜。</em></p>
+		  <p><em>希望你想要的东西都能慢慢拥有，好运加身</em></p>
+		  <p><em>也愿你不必总是坚强，不必把所有委屈都藏在心里。愿你所有的小情绪都能被温柔以待，所有的敏感都能得到理解，所有的真心都不会被辜负。</em></p>
+          <p><em>谢谢你的出现，让我曾经也开始期待那些还没有发生的明天。愿你快乐，愿你自由，愿你幸福。</em></p>
+		  <p>你的生日礼物已经在路上了，有一个电热毯，还有一个金手链。先别生我的气对不起，之前听你说晚上总是脚冷，想着你气血虚，晚上脚冷到时候也容易引发肚子上的一些不舒服，给你买了这个，但也不告诉我床是多大的，我买了两米长的，如果买大了的话，就提前充好电，平铺好了，千万不要折叠哦。</p>
+		  <p>这个金是18k金，但是重量少的可怜，希望你不要嫌弃，这是我能剩下的宽余的零花钱买的，我知道自己给不了叔叔那样的5200给你表达心意，也知道自己送这些东西你也不一定想要，毕竟都不太怎么实用，但也希望理解我的这份执着，然后也想到了自己可能也是刚好网络上大家说的那种穷人吧，跟你谈恋爱也刚好遇到了最穷时候的我，如果你也比较介意的话都没关系，只是希望这一点微薄的心意你可以收下</p>
+          <p>生日快乐，小公主佳佳。<br />希望从此以后你的泪都是关于幸福的<em>所愿皆现</em></p>
+          <p class="signature">一直希望你幸福的<br />小弟卓</p>
+          <div class="letter-actions"><button class="pixel-button pink" id="letter-finish" type="button">一切顺利公主殿下</button></div>
+        </div>
+      </article>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+</body>
+</html>
